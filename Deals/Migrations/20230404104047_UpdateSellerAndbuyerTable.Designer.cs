@@ -3,6 +3,7 @@ using Deals.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deals.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230404104047_UpdateSellerAndbuyerTable")]
+    partial class UpdateSellerAndbuyerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,18 +37,6 @@ namespace Deals.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BuyerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comments")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -74,65 +65,6 @@ namespace Deals.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Buyyers");
-                });
-
-            modelBuilder.Entity("Deals.Models.Landlord", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Contact_number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Demand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LandLordName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PlotSizeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Plotno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SocietyBlocksBlockId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlotSizeId");
-
-                    b.HasIndex("SocietyBlocksBlockId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Landlords");
                 });
 
             modelBuilder.Entity("Deals.Models.PlotSize", b =>
@@ -179,18 +111,6 @@ namespace Deals.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contact_number")
                         .IsRequired()
@@ -280,61 +200,6 @@ namespace Deals.Migrations
                     b.ToTable("societyBlocks");
                 });
 
-            modelBuilder.Entity("Deals.Models.Tenant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Budget")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category_type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Contact_number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PlotSizeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SocietyBlocksBlockId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TenantName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlotSizeId");
-
-                    b.HasIndex("SocietyBlocksBlockId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Tenants");
-                });
-
             modelBuilder.Entity("Deals.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -418,33 +283,6 @@ namespace Deals.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Deals.Models.Landlord", b =>
-                {
-                    b.HasOne("Deals.Models.PlotSize", "PlotSize")
-                        .WithMany()
-                        .HasForeignKey("PlotSizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Deals.Models.SocietyBlocks", "SocietyBlocks")
-                        .WithMany()
-                        .HasForeignKey("SocietyBlocksBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Deals.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PlotSize");
-
-                    b.Navigation("SocietyBlocks");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Deals.Models.Seller", b =>
                 {
                     b.HasOne("Deals.Models.PlotSize", "PlotSize")
@@ -481,33 +319,6 @@ namespace Deals.Migrations
                         .IsRequired();
 
                     b.Navigation("society");
-                });
-
-            modelBuilder.Entity("Deals.Models.Tenant", b =>
-                {
-                    b.HasOne("Deals.Models.PlotSize", "PlotSize")
-                        .WithMany()
-                        .HasForeignKey("PlotSizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Deals.Models.SocietyBlocks", "SocietyBlocks")
-                        .WithMany()
-                        .HasForeignKey("SocietyBlocksBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Deals.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PlotSize");
-
-                    b.Navigation("SocietyBlocks");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Deals.Models.User", b =>

@@ -51,6 +51,9 @@ namespace Deals.Repository
                 Contact_number= requestSellerDto.Contact_number,
                 Plot_number = requestSellerDto.Plot_number,
                 Demand = requestSellerDto.Demand,
+                Category = requestSellerDto.Category,
+                Category_type = requestSellerDto.Category_type,
+                Comments = requestSellerDto.Comments,
                 PlotSize = PlotSize,
                 User= user,
                 SocietyBlocks= Block
@@ -141,12 +144,37 @@ namespace Deals.Repository
             Seller.Contact_number = updateSellerRequest.Contact_number;
             Seller.Plot_number = updateSellerRequest.Plot_number;
             Seller.Demand = updateSellerRequest.Demand;
+            Seller.status = updateSellerRequest.status;
+            Seller.Category = updateSellerRequest.Category;
+            Seller.Category_type = updateSellerRequest.Category_type;
+            Seller.Comments = updateSellerRequest.Comments;
             Seller.PlotSize = plotsize;
             Seller.User = user;
             Seller.SocietyBlocks = block;
             
             response.Message = "Seller Updated Successfully";
             await _dataContext.SaveChangesAsync();
+            return response;
+        }
+
+        public async Task<ServiceResponse<GetSellerDto>> UpdateSellerStatus(int SellerID, bool Status)
+        {
+            var response = new ServiceResponse<GetSellerDto>();
+            var seller = await _dataContext.Sellers.Where(s => s.Id == SellerID).FirstOrDefaultAsync();
+            if (seller is null)
+            {
+                response.Success = false;
+                response.Message = "Seller not found";
+            }
+            else
+            {
+
+                seller.status = Status;
+                await _dataContext.SaveChangesAsync();
+                response.Data = _mapper.Map<GetSellerDto>(seller);
+                response.Message = " status updated successfully";
+            }
+
             return response;
         }
     }

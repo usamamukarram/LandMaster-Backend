@@ -2,6 +2,7 @@
 
 using Deals.Data;
 using Deals.Interface;
+using Deals.Models;
 using Deals.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,8 @@ builder.Services.AddScoped<ISocietyBlock, societyBlocksRepository>();
 builder.Services.AddScoped<Iseller, SellerRepository>();
 builder.Services.AddScoped<IPlotSize, plotSizeRepository>();
 builder.Services.AddScoped<IBuyyer,BuyyerRepository>();
+builder.Services.AddScoped<Ilandlord, LandlordRepository>();
+builder.Services.AddScoped<ITenant, TenantRepository>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters

@@ -28,6 +28,12 @@ namespace Deals.Controllers
             return Ok(buyyers);
 
         }
+        [HttpPost("UpdateStatus")]
+        public async Task<ActionResult<ServiceResponse<Buyyer>>> UpdateStatus([FromQuery] int BuyerId, [FromQuery] bool status)
+        {
+            var buyer = await _buyyer.UpdateBuyerStatus(BuyerId, status);
+            return Ok(buyer);
+        }
         [HttpPost("AddBuyyer")]
         public async Task<ActionResult<ServiceResponse<Buyyer>>> AddBuyyer(AddBuyyerDto AddBuyyerRequest)
         {

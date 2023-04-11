@@ -10,5 +10,6 @@ namespace Deals.Interface
         Task<ServiceResponse<GetBuyyerDto>> GetBuyyerByID(int BuyyerID);
         Task<ServiceResponse<GetBuyyerDto>> AddBuyyer(AddBuyyerDto requestBuyyerDto);
         Task<ServiceResponse<GetBuyyerDto>> UpdateBuyyer(UpdateBuyyerDto updateBuyyerRequest);
+        Task<ServiceResponse<GetBuyyerDto>> UpdateBuyerStatus(int BuyyerID, bool Status);
     }
 }

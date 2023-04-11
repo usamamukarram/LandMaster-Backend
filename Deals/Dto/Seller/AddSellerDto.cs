@@ -11,6 +11,9 @@ namespace Deals.Dto.Seller
         public string Contact_number { get; set; } = string.Empty;
         public string Plot_number { get; set; } = string.Empty;
         public string Demand { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
+        public string Category_type { get; set; } = string.Empty;
+        public string Comments { get; set; } = string.Empty;
         [JsonIgnore]
         public Deals.Models.PlotSize ? PlotSize { get; set; }
         public int PlotSizeId { get; set; } 

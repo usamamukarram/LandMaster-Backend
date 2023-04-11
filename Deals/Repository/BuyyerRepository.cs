@@ -50,6 +50,9 @@ namespace Deals.Repository
                 Contact_number = requestBuyyerDto.Contact_number,
              
                 Budget = requestBuyyerDto.Budget,
+                Category = requestBuyyerDto.Category,
+                Category_type = requestBuyyerDto.Category_type,
+                Comments = requestBuyyerDto.Comments,
                 PlotSize = PlotSize,
                 User = user,
                 SocietyBlocks = Block
@@ -57,7 +60,7 @@ namespace Deals.Repository
             };
 
             _dataContext.Add(buyyer);
-            response.Message = "Buyyer Added Successfully";
+            response.Message = "Buyer Added Successfully";
             await _dataContext.SaveChangesAsync();
             return response;
         }
@@ -76,7 +79,7 @@ namespace Deals.Repository
             if (buyyers is null)
             {
                 response.Success = false;
-                response.Message = "No Society Found";
+                response.Message = "No Buyer Found";
             }
 
             response.Data = buyyers.Select(c => _mapper.Map<GetBuyyerDto>(c)).ToList();
@@ -97,10 +100,31 @@ namespace Deals.Repository
             if (Buyyer is null)
             {
                 response.Success = false;
-                response.Message = "  Buyyer not Found";
+                response.Message = "  Buyer not Found";
             }
 
             response.Data = _mapper.Map<GetBuyyerDto>(Buyyer);
+            return response;
+        }
+
+        public async Task<ServiceResponse<GetBuyyerDto>> UpdateBuyerStatus(int BuyyerID, bool Status)
+        {
+            var response = new ServiceResponse<GetBuyyerDto>();
+            var buyer = await _dataContext.Buyyers.Where(b => b.Id == BuyyerID).FirstOrDefaultAsync();
+            if (buyer is null)
+            {
+                response.Success = false;
+                response.Message = "Buyer not found";
+            }
+            else
+            {
+
+                buyer.status = Status;
+                await _dataContext.SaveChangesAsync();
+                response.Data = _mapper.Map<GetBuyyerDto>(buyer);
+                response.Message = " status updated successfully";
+            }
+
             return response;
         }
 
@@ -111,7 +135,7 @@ namespace Deals.Repository
             if (Buyyer is null)
             {
                 response.Success = false;
-                response.Message = "Buyyer not found";
+                response.Message = "Buyer not found";
                 return response;
             }
             var block = await _dataContext.societyBlocks.FirstOrDefaultAsync(b => b.BlockId == updateBuyyerRequest.blockId);
@@ -139,11 +163,15 @@ namespace Deals.Repository
             Buyyer.BuyerName = updateBuyyerRequest.BuyerName;
             Buyyer.Contact_number = updateBuyyerRequest.Contact_number;
             Buyyer.Budget = updateBuyyerRequest.Budget;
+            Buyyer.status = updateBuyyerRequest.status;
+            Buyyer.Category = updateBuyyerRequest.Category;
+            Buyyer.Category_type = updateBuyyerRequest.Category_type;
+            Buyyer.Comments = updateBuyyerRequest.Comments;
             Buyyer.PlotSize = plotsize;
             Buyyer.User = user;
             Buyyer.SocietyBlocks = block;
 
-            response.Message = "Buyyer Updated Successfully";
+            response.Message = "Buyer Updated Successfully";
             await _dataContext.SaveChangesAsync();
             return response;
         }

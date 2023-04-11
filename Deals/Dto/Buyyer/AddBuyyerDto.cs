@@ -10,6 +10,9 @@ namespace Deals.Dto.Buyyer
         [Phone]
         public string Contact_number { get; set; } = string.Empty;
         public string Budget { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
+        public string Category_type { get; set; } = string.Empty;
+        public string Comments { get; set; } = string.Empty;
         [JsonIgnore]
         public Deals.Models.PlotSize? PlotSize { get; set; }
         public int PlotSizeId { get; set; }

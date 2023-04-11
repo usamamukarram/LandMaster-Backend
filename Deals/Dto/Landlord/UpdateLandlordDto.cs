@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Deals.Dto.Seller
+namespace Deals.Dto.Landlord
 {
-    public class UpdateSeller
+    public class UpdateLandlordDto
     {
         public int Id { get; set; }
-        public string SellerName { get; set; } = string.Empty;
+        public string LandlordName { get; set; } = string.Empty;
         [Phone]
         public string Contact_number { get; set; } = string.Empty;
-        public string Plot_number { get; set; } = string.Empty;
+        public string Plotno { get; set; } = string.Empty;
         public string Demand { get; set; } = string.Empty;
         public bool status { get; set; }
         public string Category { get; set; } = string.Empty;

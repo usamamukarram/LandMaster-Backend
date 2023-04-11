@@ -10,6 +10,10 @@ namespace Deals.Models
         public string Contact_number { get; set; } = string.Empty;
         public string Plot_number { get; set; } = string.Empty;
         public string Demand { get; set; } = string.Empty;
+        public bool status { get; set; }= false;
+        public string Category { get; set; } = string.Empty;
+        public string Category_type { get; set; } = string.Empty;
+        public string Comments { get; set; } = string.Empty;
         public PlotSize PlotSize { get; set; }
         public User User { get; set; }
 

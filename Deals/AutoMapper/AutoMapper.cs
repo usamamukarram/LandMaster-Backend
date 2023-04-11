@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Deals.Dto.Buyyer;
+using Deals.Dto.Landlord;
 using Deals.Dto.PlotSize;
 using Deals.Dto.Role;
 using Deals.Dto.Seller;
 using Deals.Dto.Society;
 using Deals.Dto.SocietyBlocksDto;
+using Deals.Dto.Tenant;
 using Deals.Dto.User;
 using Deals.Models;
 
@@ -22,6 +24,8 @@ namespace Deals.AutoMapper
             CreateMap<Seller, GetSellerDto>();
             CreateMap<PlotSize, AddPlotSizeDto>();
             CreateMap<Buyyer, GetBuyyerDto>();
+            CreateMap<Landlord, GetLandlordDto>();
+            CreateMap<Tenant, GetTenantDto>();
            
         }
     }

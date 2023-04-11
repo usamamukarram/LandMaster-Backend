@@ -54,5 +54,11 @@ namespace Deals.Controllers
             var seller = await _Iseller.UpdateSeller(UpdateSellerDtoRequest);
             return Ok(seller);
         }
+        [HttpPost("UpdateStatus")]
+        public async Task<ActionResult<ServiceResponse<Seller>>> UpdateStatus([FromQuery] int SellerId, [FromQuery] bool status)
+        {
+            var seller = await _Iseller.UpdateSellerStatus(SellerId, status);
+            return Ok(seller);
+        }
     }
 }
